@@ -7,7 +7,7 @@
     username:   "{{ Username }}"
     password:   "{{ Password }}"
     deploytype:  "{{ DeployType }}"
-    openstack_ip: "172.20.11.254"
+    openstack_ip: "10.10.100.11"
 
     cmd_sequence:  [  "projects.yml", "members.yml", "security-groups.yml", "security-rules.yml", "networks.yml", "subnets.yml", "ports.yml", "servers-qfx.yml", "physical-router.yml", "network-properties.yml" ]
 #    cmd_sequence:  [  "projects.yml" ]
