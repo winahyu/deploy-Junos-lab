@@ -1,0 +1,63 @@
+- name: LAB Bootcamp Create/Delete Automation
+  hosts: localhost
+  gather_facts: no
+
+  vars: 
+    pod_amount: "{{ NumberofPods }}"
+    username:   "{{ Username }}"
+    password:   "{{ Password }}"
+    deploytype:  "{{ DeployType }}"
+
+    cmd_sequence:  [  "projects.yml", "members.yml", "security-groups.yml", "security-rules.yml", "networks.yml", "subnets.yml", "ports.yml", "servers-qfx.yml", "physical-router.yml", "network-properties.yml" ]
+#    cmd_sequence:  [  "projects.yml" ]
+
+    availability_zone: "nova" #server to deploy to
+    auth_url: http://172.20.11.254:5000/v3 #openstack auth url
+    contrail_url_fqname: http://172.20.11.254:8082/fqname-to-id
+    contrail_url_vn: http://172.20.11.254:8082/virtual-network
+    contrail_update_ref: http://172.20.11.254:8082/ref-update
+    project_prefix: "{{ PodPrefix }}"
+
+  tasks:
+    - name: Openstack and Contrail Variable for provision
+      set_fact: 
+        state: "present" #provision in openstack
+        operation: "ADD" #provision in contrail
+      when: deploytype=="CREATE"
+
+    - name: Openstack and Contrail Variable for deprovision
+      set_fact:
+        state: "absent" #deprovision in openstack
+        operation: "DELETE" #deprovision in contrail
+      when: deploytype=="DESTROY"
+
+    - name: populate POD list sequence
+      debug: msg="{{ item }}"
+      with_sequence: start=1 end={{ pod_amount }}
+      register: pod_num
+    - set_fact:
+        pod_sequence: "{{ pod_num.results | map(attribute='item') | list }}"
+
+    - name: DESTROY POD from LAB
+      vars:
+        project: "{{ project_prefix }}-{{ item[1] }}"	
+        taskitem: "tasks/{{ item[0] }}"
+      include_tasks: "{{ taskitem }}"
+      with_nested:
+        - "{{ cmd_sequence[-2::-1] }}"
+        - "{{ pod_sequence }}"
+      when: deploytype=="DESTROY"
+    - name: CREATE POD in LAB
+      vars:
+        project: "{{ project_prefix }}-{{ item[1] }}"
+        taskitem: "tasks/{{ item[0] }}" 
+      include_tasks: "{{ taskitem }}"
+      with_nested:
+        - "{{ cmd_sequence }}"
+        - "{{ pod_sequence }}"
+      when: deploytype=="CREATE"
+
+#      debug:
+#         msg: "{{ taskitem }}"
+
+
