@@ -1,4 +1,4 @@
-# deploy-qfx-lab
+# deploy-vqfx-lab
 Ansible playbooks to manage the vQFX Lab in the Openstack with Contrail.
 
 Status:
@@ -17,11 +17,11 @@ DeployType   : DESTROY or CREATE <br>
 ### Provisioning Lab (all pods):
 
 ```
-ansible-playbook deploy.yaml -e DeployType=CREATE -e Username=admin -e PodPrefix=QFX-BOOTCAMP-POD -e NumberofPods=1 -e Password=*****
+ansible-playbook deploy.yaml -e DeployType=CREATE -e Username=admin -e PodPrefix=VQFX-LAB-POD -e NumberofPods=1 -e Password=*****
 ```
 
 ### Deprovisioning Lab (all pods):
 
 ```
-ansible-playbook deploy.yaml -e DeployType=DESTROY -e Username=admin -e PodPrefix=QFX-BOOTCAMP-POD -e NumberofPods=1 -e Password=*****
+ansible-playbook deploy.yaml -e DeployType=DESTROY -e Username=admin -e PodPrefix=VQFX-LAB-POD -e NumberofPods=1 -e Password=*****
 ```
