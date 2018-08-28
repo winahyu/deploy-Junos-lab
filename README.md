@@ -3,7 +3,7 @@ Ansible playbooks to manage the vQFX Lab in the Openstack with Contrail.
 
 Status:
 
-Using single playbook with the extra parameters to differentiate between deployment type, the selections are CREATE or DESTROY,
+Using a single playbook with the extra parameters to differentiate between deployment type, the selections are CREATE or DESTROY,
 
 ### other parameters :
 
@@ -13,6 +13,8 @@ NumberofPods : Number of Pods need to be created <br>
 PodPrefix    : Pod prefix name <br>
 DeployType   : DESTROY or CREATE <br>
 
+
+for the VM image name, update the image name inside tasks/servers-qfx.yml 
 
 ### Provisioning Lab (all pods):
 
