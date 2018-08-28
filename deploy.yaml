@@ -57,5 +57,3 @@
         - "{{ pod_sequence }}"
       when: deploytype=="CREATE"
 
-
-
