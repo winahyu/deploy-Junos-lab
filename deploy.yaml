@@ -9,9 +9,20 @@
     deploytype:  "{{ DeployType }}"
     openstack_ip: "10.10.100.11"
 
-    cmd_sequence:  [  "projects.yml", "members.yml", "security-groups.yml", "security-rules.yml", "networks.yml", "subnets.yml", "ports.yml", "servers-qfx.yml", "physical-router.yml", "network-properties.yml" ]
+    cmd_sequence:  
+      - projects.yml
+      - members.yml
+      - security-groups.yml
+      - security-rules.yml
+      - networks.yml
+      - subnets.yml
+      - ports.yml
+      - servers-qfx.yml
+      - physical-router.yml
+      - network-properties.yml
 
-    availability_zone: "nova" #server to deploy to
+
+    availability_zone: "nova" #openstack server zone to deploy to
     auth_url: "http://{{ openstack_ip }}:5000/v3" #openstack auth url
     contrail_url_fqname: "http://{{ openstack_ip }}:8082/fqname-to-id"
     contrail_url_vn: "http://{{ openstack_ip }}:8082/virtual-network"
