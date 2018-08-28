@@ -1,0 +1,314 @@
+---
+
+#######################################################################
+#                                                                    #
+#            This tasks file defines Contrail configs                #
+#                                                                    #
+#######################################################################
+
+- name: Get keystone
+  os_auth:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+  register: keystone
+- debug:  msg="Key Value {{ keystone.ansible_facts.auth_token }}"
+
+- name: Get UUID from Network Name for "{{ project }}-MGMT"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-MGMT"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Update L3 capability for "{{ project }}-MGMT"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-MGMT"
+        virtual_network_properties:
+          forwarding_mode: l3
+          allow_transit: false
+          mirror_destination: false
+          rpf: enable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-QFX-1-INT"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-QFX-1-INT"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-QFX-1-INT"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-QFX-1-INT"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-QFX-2-INT"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-QFX-2-INT"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-QFX-2-INT"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-QFX-2-INT"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-0/0/1"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-0/0/1"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-0/0/1"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-0/0/1"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-0/0/2"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-0/0/2"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-0/0/2"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-0/0/2"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-0/0/3"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-0/0/3"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-0/0/3"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-0/0/3"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result
+
+- name: Get UUID from Network Name for "{{ project }}-0/0/4"
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-0/0/4"
+      type: virtual-network
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Disable RPF for "{{ project }}-0/0/4"
+  uri:
+    url: "{{ contrail_url_vn }}/{{ uuid_result.json.uuid }}"
+    method: PUT
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      virtual-network:
+        fq_name:
+        - default-domain
+        - "{{ project }}"
+        - "{{ project }}-0/0/4"
+        virtual_network_properties:
+          allow_transit: false
+          mirror_destination: false
+          rpf: disable
+    body_format: json
+  register: result
+- debug: var=result

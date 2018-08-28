@@ -1,0 +1,112 @@
+---
+
+##################################################################
+#                                                                #
+#            This tasks file defines the Networks                #
+#                                                                #
+##################################################################
+
+- name: MGMT network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-MGMT"
+    external: false
+
+- name: INTERNAL RE-PFE QFX-1 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-QFX-1-INT"
+    external: false
+
+- name: INTERNAL RE-PFE QFX-2 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-QFX-2-INT"
+    external: false
+
+- name: ge-0/0/1 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-0/0/1"
+    external: false
+
+- name: ge-0/0/2 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-0/0/2"
+    external: false
+
+- name: ge-0/0/3 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-0/0/3"
+    external: false
+
+- name: ge-0/0/4 network
+  os_network:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    name: "{{ project }}-0/0/4"
+    external: false

@@ -1,0 +1,61 @@
+---
+
+#######################################################################
+#                                                                    #
+#            This tasks file defines Contrail configs                #
+#                                                                    #
+######################################################################
+
+- name: Get keystone
+  os_auth:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+  register: keystone
+
+- debug:  msg="Key Value {{ keystone.ansible_facts.auth_token }}"
+
+- name: Get UUID for Physical Router
+  uri:
+    url: "{{ contrail_url_fqname }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      fq_name:
+      - default-global-system-config
+      - SDN-365-R34-U20B-VMX
+      type: physical-router
+    body_format: json
+  register: uuid_result
+- debug: var=uuid_result.json.uuid
+
+- name: Add/Delete External Router for "{{ project }}-MGMT"
+  uri:
+    url: "{{ contrail_update_ref }}"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    headers:
+      Content-Type: "application/json"
+      x-auth-token: "{{ keystone.ansible_facts.auth_token }}"
+    body:
+      operation: "{{operation}}"
+      uuid: "{{uuid_result.json.uuid}}"
+      type: physical_router
+      ref-type: virtual-network
+      ref-fq-name:
+      - default-domain
+      - "{{ project }}"
+      - "{{ project }}-MGMT"
+      attr:
+    body_format: json
+  register: result
+- debug: var=result

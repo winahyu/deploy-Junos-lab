@@ -1,0 +1,120 @@
+---
+
+##################################################################
+#                                                                #
+#               This tasks file defines the VMs                  #
+#                                                                #
+##################################################################
+
+- name: JUMPBOX VM
+  os_server:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    image: JUMPBOX-LATEST
+    name: "{{ project }}-JUMPBOX"
+    availability_zone: "{{ availability_zone }}"
+    flavor: m1.small
+    state: "{{ state }}"
+    auto_ip: false
+    timeout: 400
+    security_groups: "{{ project }}-SECURITY"
+    nics:
+      - port-name: "{{ project }}-JUMPBOX-MGMT"
+
+- name: QFX-1-RE VM
+  os_server:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    image: VQFX-RE
+    name: "{{ project }}-QFX-1-RE"
+    availability_zone: "{{ availability_zone }}"
+    flavor: vQFX
+    state: "{{ state }}"
+    auto_ip: false
+    timeout: 400
+    security_groups: "{{ project }}-SECURITY"
+    nics:
+      - port-name: "{{ project }}-QFX-1-RE-MGMT"
+      - port-name: "{{ project }}-QFX-1-RE-INT"
+      - port-name: "{{ project }}-QFX-1-0/0/1"
+      - port-name: "{{ project }}-QFX-1-0/0/2"
+      - port-name: "{{ project }}-QFX-1-0/0/3"
+      - port-name: "{{ project }}-QFX-1-0/0/4"
+
+- name: QFX-1-PFE VM
+  os_server:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    image: VQFX-PFE
+    name: "{{ project }}-QFX-1-PFE"
+    availability_zone: "{{ availability_zone }}"
+    flavor: vQFX
+    state: "{{ state }}"
+    auto_ip: false
+    timeout: 400
+    security_groups: "{{ project }}-SECURITY"
+    nics:
+      - port-name: "{{ project }}-QFX-1-PFE-MGMT"
+      - port-name: "{{ project }}-QFX-1-PFE-INT"
+
+- name: QFX-2-RE VM
+  os_server:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    image: VQFX-RE
+    name: "{{ project }}-QFX-2-RE"
+    availability_zone: "{{ availability_zone }}"
+    flavor: vQFX
+    state: "{{ state }}"
+    auto_ip: false
+    timeout: 400
+    security_groups: "{{ project }}-SECURITY"
+    nics:
+      - port-name: "{{ project }}-QFX-2-RE-MGMT"
+      - port-name: "{{ project }}-QFX-2-RE-INT"
+      - port-name: "{{ project }}-QFX-2-0/0/1"
+      - port-name: "{{ project }}-QFX-2-0/0/2"
+      - port-name: "{{ project }}-QFX-2-0/0/3"
+      - port-name: "{{ project }}-QFX-2-0/0/4"
+
+
+- name: QFX-2-PFE VM
+  os_server:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    image: VQFX-PFE
+    name: "{{ project }}-QFX-2-PFE"
+    availability_zone: "{{ availability_zone }}"
+    flavor: vQFX
+    state: "{{ state }}"
+    auto_ip: false
+    timeout: 400
+    security_groups: "{{ project }}-SECURITY"
+    nics:
+      - port-name: "{{ project }}-QFX-2-PFE-MGMT"
+      - port-name: "{{ project }}-QFX-2-PFE-INT"

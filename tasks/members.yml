@@ -1,0 +1,35 @@
+---
+
+##################################################################
+#                                                                #
+#              This tasks file defines the Members               #
+#                                                                #
+##################################################################
+
+- name: admin role
+  os_user_role:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    user: admin
+    role: admin
+    project: "{{ project }}"
+
+- name: _member_ role
+  os_user_role:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    user: admin
+    role: _member_
+    project: "{{ project }}"

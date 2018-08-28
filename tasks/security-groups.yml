@@ -1,0 +1,19 @@
+---
+
+##########################################################################
+#                                                                        #
+#              This tasks file defines the security groups               #
+#                                                                        #
+##########################################################################
+
+- name: Security Group
+  os_security_group:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    name: "{{ project }}-SECURITY"
+    state: "{{ state }}"

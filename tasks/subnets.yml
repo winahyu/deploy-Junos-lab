@@ -1,0 +1,140 @@
+---
+
+##################################################################
+#                                                                #
+#               This tasks file defines the Subnets              #
+#                                                                #
+##################################################################
+
+- name: MGMT subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-MGMT"
+    name: "{{ project }}-MGMT"
+    cidr: 10.233.240.0/20
+    enable_dhcp: yes
+    no_gateway_ip: no
+    gateway_ip: 10.233.240.1
+    allocation_pool_start: 10.233.255.1
+    allocation_pool_end: 10.233.255.240
+
+- name: INTERNAL QFX-1 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-QFX-1-INT"
+    name: "{{ project }}-QFX-1-INT"
+    cidr: 169.252.0.0/14
+    enable_dhcp: no
+    no_gateway_ip: yes
+    allocation_pool_start: 169.253.0.1
+    allocation_pool_end: 169.253.0.4
+
+- name: INTERNAL QFX-2 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-QFX-2-INT"
+    name: "{{ project }}-QFX-2-INT"
+    cidr: 169.252.0.0/14
+    enable_dhcp: no
+    no_gateway_ip: yes
+    allocation_pool_start: 169.253.0.1
+    allocation_pool_end: 169.253.0.4
+
+- name: ge-0/0/1 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-0/0/1"
+    name: "{{ project }}-0/0/1"
+    cidr: 172.20.76.0/23
+    enable_dhcp: no
+    no_gateway_ip: yes
+
+- name: ge-0/0/2 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-0/0/2"
+    name: "{{ project }}-0/0/2"
+    cidr: 172.20.64.0/22
+    enable_dhcp: no
+    no_gateway_ip: yes
+
+- name: ge-0/0/3 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-0/0/3"
+    name: "{{ project }}-0/0/3"
+    cidr: 172.18.0.0/22
+    enable_dhcp: no
+    no_gateway_ip: yes
+
+- name: ge-0/0/4 subnet
+  os_subnet:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: admin
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    project: "{{ project }}"
+    network_name: "{{ project }}-0/0/4"
+    name: "{{ project }}-0/0/4"
+    cidr: 172.20.100.0/22
+    enable_dhcp: no
+    no_gateway_ip: yes

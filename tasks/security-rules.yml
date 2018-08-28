@@ -1,0 +1,39 @@
+---
+
+#########################################################################
+#                                                                       #
+#              This tasks file defines the security rules               #
+#                                                                       #
+#########################################################################
+
+- name: Security Rule IPv4
+  os_security_group_rule:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    security_group: "{{ project }}-SECURITY"
+    ethertype: IPv4
+    direction: ingress
+    remote_ip_prefix: 0.0.0.0/0
+    state: "{{ state }}"
+    interface: admin
+
+- name: Security Rule IPv6
+  os_security_group_rule:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    security_group: "{{ project }}-SECURITY"
+    ethertype: IPv6
+    direction: ingress
+    remote_ip_prefix: ::/0
+    state: "{{ state }}"
+    interface: admin

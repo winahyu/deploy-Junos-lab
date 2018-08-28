@@ -1,0 +1,297 @@
+---
+
+##################################################################
+#                                                                #
+#               This tasks file defines the Ports                #
+#                                                                #
+##################################################################
+
+- name: QFX-1-RE-MGMT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-RE-MGMT"
+    network: "{{ project }}-MGMT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 10.233.255.2
+
+- name: QFX-1-PFE-MGMT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-PFE-MGMT"
+    network: "{{ project }}-MGMT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 10.233.255.3
+
+- name: QFX-2-RE-MGMT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-RE-MGMT"
+    network: "{{ project }}-MGMT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 10.233.255.4
+
+- name: QFX-2-PFE-MGMT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-PFE-MGMT"
+    network: "{{ project }}-MGMT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 10.233.255.5
+
+- name: QFX-1-RE-INT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-RE-INT"
+    network: "{{ project }}-QFX-1-INT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 169.253.0.2
+
+- name: QFX-1-PFE-INT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-PFE-INT"
+    network: "{{ project }}-QFX-1-INT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 169.253.0.1
+
+- name: QFX-2-RE-INT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-RE-INT"
+    network: "{{ project }}-QFX-2-INT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 169.253.0.2
+
+- name: QFX-2-PFE-INT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-PFE-INT"
+    network: "{{ project }}-QFX-2-INT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 169.253.0.1
+
+- name: JUMPBOX-MGMT port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-JUMPBOX-MGMT"
+    network: "{{ project }}-MGMT"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 10.233.255.1
+
+- name: QFX-1-0/0/1 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-0/0/1"
+    network: "{{ project }}-0/0/1"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.77.1
+
+- name: QFX-2-0/0/1 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-0/0/1"
+    network: "{{ project }}-0/0/1"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.77.2
+
+- name: QFX-1-0/0/2 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-0/0/2"
+    network: "{{ project }}-0/0/2"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.66.1
+
+- name: QFX-2-0/0/2 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-0/0/2"
+    network: "{{ project }}-0/0/2"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.66.2
+
+- name: QFX-1-0/0/3 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-0/0/3"
+    network: "{{ project }}-0/0/3"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.18.1.2
+
+
+- name: QFX-2-0/0/3 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-0/0/3"
+    network: "{{ project }}-0/0/3"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.18.1.1
+
+- name: QFX-1-0/0/4 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-1-0/0/4"
+    network: "{{ project }}-0/0/4"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.101.1
+
+- name: QFX-2-0/0/4 port
+  os_port:
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project }}"
+      user_domain_name: default
+      project_domain_name: default
+    interface: admin
+    state: "{{ state }}"
+    name: "{{ project }}-QFX-2-0/0/4"
+    network: "{{ project }}-0/0/4"
+    security_groups: "{{ project }}-SECURITY"
+    fixed_ips:
+      - ip_address: 172.20.101.10
