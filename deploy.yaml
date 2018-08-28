@@ -1,4 +1,4 @@
-- name: LAB Bootcamp Create/Delete Automation
+- name: VQFX LAB Create/Delete Automation
   hosts: localhost
   gather_facts: no
 
@@ -7,15 +7,16 @@
     username:   "{{ Username }}"
     password:   "{{ Password }}"
     deploytype:  "{{ DeployType }}"
+    openstack_ip: "172.20.11.254"
 
     cmd_sequence:  [  "projects.yml", "members.yml", "security-groups.yml", "security-rules.yml", "networks.yml", "subnets.yml", "ports.yml", "servers-qfx.yml", "physical-router.yml", "network-properties.yml" ]
 #    cmd_sequence:  [  "projects.yml" ]
 
     availability_zone: "nova" #server to deploy to
-    auth_url: http://172.20.11.254:5000/v3 #openstack auth url
-    contrail_url_fqname: http://172.20.11.254:8082/fqname-to-id
-    contrail_url_vn: http://172.20.11.254:8082/virtual-network
-    contrail_update_ref: http://172.20.11.254:8082/ref-update
+    auth_url: "http://{{ openstack_ip }}:5000/v3" #openstack auth url
+    contrail_url_fqname: "http://{{ openstack_ip }}:8082/fqname-to-id"
+    contrail_url_vn: "http://{{ openstack_ip }}:8082/virtual-network"
+    contrail_update_ref: "http://{{ openstack_ip }}:8082/ref-update"
     project_prefix: "{{ PodPrefix }}"
 
   tasks:
