@@ -1,4 +1,4 @@
-- name: VQFX LAB Create/Delete Automation
+- name: VQFX LAB Create/Destroy Automation
   hosts: localhost
   gather_facts: no
 
@@ -10,7 +10,6 @@
     openstack_ip: "10.10.100.11"
 
     cmd_sequence:  [  "projects.yml", "members.yml", "security-groups.yml", "security-rules.yml", "networks.yml", "subnets.yml", "ports.yml", "servers-qfx.yml", "physical-router.yml", "network-properties.yml" ]
-#    cmd_sequence:  [  "projects.yml" ]
 
     availability_zone: "nova" #server to deploy to
     auth_url: "http://{{ openstack_ip }}:5000/v3" #openstack auth url
@@ -58,7 +57,5 @@
         - "{{ pod_sequence }}"
       when: deploytype=="CREATE"
 
-#      debug:
-#         msg: "{{ taskitem }}"
 
 
